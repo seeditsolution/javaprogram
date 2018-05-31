@@ -1,0 +1,11 @@
+plan
+
+inistialise the grid
+place the models
+start taking user input to kill them
+ai input to kill user
+give feedback on it
+
+
+
+try to have gui for it
