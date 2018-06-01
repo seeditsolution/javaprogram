@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 
 public class Battleships{
-    private int model[][];
+    private Cell model[][];
     private final int xSize;
     private final int ySize;
     private final static String SEPERATOR = "|";
@@ -23,7 +23,7 @@ public class Battleships{
         this.xSize = x;
         this.ySize = y;
         this.ships = ships;
-        model = new int[x][y];
+        model = new Cell[x][y];
         scanner = new Scanner(System.in);
 
         inistialiseModel();
@@ -36,7 +36,7 @@ public class Battleships{
     private void inistialiseModel(){
         for(int x=0; x<this.xSize; x++){
             for(int y=0; y<this.ySize; y++){
-                model[x][y] = 0;
+                model[x][y] = new Cell();
             }
         }
         printModel();
@@ -54,16 +54,16 @@ public class Battleships{
             System.out.print(SEPERATOR + String.valueOf(x));
             for(int y=0; y<this.ySize; y++){
                 System.out.print(SEPERATOR);
-                int value = model[x][y];
-                if(value==0 || value==1){//emtpy or ship
-                    if (value==1){
-                        System.out.print("S");
+                State state = model[x][y].getState();
+                if(state==State.EMPTY || state==State.SHIP){//emtpy or ship
+                    if (state==State.SHIP){
+                        System.out.print(String.valueOf(model[x][y].getShip().getHealth()));
                     }else {
                         System.out.print(" ");
                     }
-                }else if (value==2) {//misplaced bomb
+                }else if (state==State.MISS) {//misplaced bomb
                     System.out.print("-");
-                }else if (value==3) {//hit
+                }else if (state==State.HIT) {//hit
                     System.out.print("H");
                 }
             }
@@ -85,11 +85,11 @@ public class Battleships{
                 System.out.print("Gib y: ");
                 y = scanner.nextInt();
             }
-            if(model[x][y]==1){
+            if(model[x][y].getState()==State.SHIP){
                 System.out.println("Cannot place a ship on another ship! Try again please!");
                 i-=1;
             }else{
-                model[x][y]=1;
+                model[x][y].assignShip();
             }
             x=xSize;
             y=ySize;
@@ -108,18 +108,23 @@ public class Battleships{
             System.out.print("Gib target y: ");
             yi = scanner.nextInt();
             guess(xi,yi);
+            printModel();
+            
         }
         printModel();
     }
 
     private void guess(int x, int y){
         bombsDropped+=1;
-        if(model[x][y]==0){
-            model[x][y] = 2;
+        if(model[x][y].getState()==State.EMPTY){
+            model[x][y].miss();
             System.out.println("*** MISS!");
-        }else if (model[x][y]==1) {
-            model[x][y] = 3;
-            ships-=1;
+        }else if (model[x][y].getState()==State.SHIP) {
+            model[x][y].getShip().decreaseHealth();
+            if (model[x][y].getShip().getHealth()==0){
+                ships-=1;
+                model[x][y].hit();
+            }
             if (this.ships==0){
                 System.out.printf("*** HIT! YOU HAVE WON! Bombs used: %s", bombsDropped);
             }else{
