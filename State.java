@@ -1,6 +1,6 @@
 public enum State {
     EMPTY("Empty"),
-    SHIP("Ship"),
+    OCCUPIED("Ship"),
     MISS("Miss"),
     HIT("Hit");
 

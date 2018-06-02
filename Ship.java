@@ -13,4 +13,8 @@ public class Ship {
     public int getHealth() {
         return health;
     }
+    @Override
+    public String toString(){
+        return String.format("Ship: %s",String.valueOf(health));
+    }
 }

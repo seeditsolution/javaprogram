@@ -1,8 +1,7 @@
-
-public class Cell {
+public class Cell<T> {
 
     private State state;
-    private Ship ship;
+    private T object;
 
     public Cell() {
         state = State.EMPTY;
@@ -16,19 +15,30 @@ public class Cell {
         state=State.MISS;
     }
 
-    public void assignShip(){
-        ship = new Ship();
-        state=State.SHIP;
+    public void assignObject(T object){
+        this.object = object;
+        state=State.OCCUPIED;
     }
 
-    public void assignShip(int health){
-        ship = new Ship(health);
-        state=State.SHIP;
-    }
     public State getState(){
         return state;
     }
-    public Ship getShip(){
-        return ship;
+    public T getObject(){
+        return object;
+    }
+    public void setState(State state){
+        this.state = state;
+    }
+    public void setObject(T object){
+        this.object = object;
+    }
+
+    @Override
+    public String toString(){
+        String string = this.state.toString();
+        if(object!= null ){
+            string+=" | " + object;
+        }
+        return string;
     }
 }
