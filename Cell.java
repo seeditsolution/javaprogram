@@ -29,8 +29,12 @@ public class Cell<T> {
     public void setState(State state){
         this.state = state;
     }
-    public void setObject(T object){
-        this.object = object;
+    public void resetCell() {
+        state=state.EMPTY;
+        object=null;
+    }
+    public void resetObject(){
+        object=null;
     }
 
     @Override

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Random;
+
 
 public class Battleships{
     private ShipCell model[][];
@@ -24,15 +26,6 @@ public class Battleships{
         scanner.close();
     }
 
-    private void inistialiseModel(){
-        for(int x=0; x<this.xSize; x++){
-            for(int y=0; y<this.ySize; y++){
-                model[x][y] = new ShipCell();
-            }
-        }
-        printModel();
-    }
-
     public void printModel(){
         System.out.print("\n"+ SEPERATOR + " " + SEPERATOR);
 
@@ -46,15 +39,15 @@ public class Battleships{
             for(int y=0; y<this.ySize; y++){
                 System.out.print(SEPERATOR);
                 State state = model[x][y].getState();
-                if(state==State.EMPTY || state==State.OCCUPIED){//emtpy or ship
+                if(state==State.EMPTY || state==State.OCCUPIED){
                     if (state==State.OCCUPIED){
                         System.out.print(String.valueOf(model[x][y].getObject().getHealth()));
                     }else {
                         System.out.print(" ");
                     }
-                }else if (state==State.MISS) {//misplaced bomb
+                }else if (state==State.MISS) {
                     System.out.print("-");
-                }else if (state==State.HIT) {//hit
+                }else if (state==State.HIT) {
                     System.out.print("H");
                 }
             }
@@ -63,7 +56,29 @@ public class Battleships{
         System.out.println();
     }
 
-    public void setShipRoutine(int times) {
+
+    private void inistialiseModel(){
+        for(int x=0; x<this.xSize; x++){
+            for(int y=0; y<this.ySize; y++){
+                model[x][y] = new ShipCell();
+            }
+        }
+        printModel();
+    }
+
+    private void setShipRoutineComputer() {
+        int x;
+        int y;
+        Random rand = new Random();
+        x = rand.nextInt(xSize);
+        y = rand.nextInt(ySize);
+
+        if(model[x][y].getState()==State.OCCUPIED){
+        }
+    }
+
+
+    private void setShipRoutine(int times) {
         int x=xSize;
         int y=ySize;
         for (int i=0;i<times;i++){
@@ -80,7 +95,7 @@ public class Battleships{
                 System.out.println("Cannot place a ship on another ship! Try again please!");
                 i-=1;
             }else{
-                Ship ship = new Ship();
+                Ship ship = new Ship(Orientation.FRIENDLY);
                 model[x][y].assignObject(ship);
             }
             x=xSize;
@@ -89,9 +104,7 @@ public class Battleships{
         printModel();
     }
 
-
-
-    public void guessRoutine(){
+    private void guessRoutine(){
         int xi;
         int yi;
         while (this.ships != 0) {
@@ -115,6 +128,7 @@ public class Battleships{
             if (model[x][y].getObject().getHealth()==0){
                 ships-=1;
                 model[x][y].hit();
+                model[x][y].resetObject();
             }
             if (this.ships==0){
                 System.out.printf("*** HIT! YOU HAVE WON! Bombs used: %s", bombsDropped);
