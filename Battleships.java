@@ -3,7 +3,7 @@ import java.util.Random;
 
 
 public class Battleships{
-    private ShipCell model[][];
+    private DoubleShipCell model[][];
     private final int xSize;
     private final int ySize;
     private final static String SEPERATOR = "|";
@@ -16,7 +16,7 @@ public class Battleships{
         this.xSize = x;
         this.ySize = y;
         this.ships = ships;
-        model = new ShipCell[x][y];
+        model = new DoubleShipCell[x][y];
         scanner = new Scanner(System.in);
 
         inistialiseModel();
@@ -26,7 +26,7 @@ public class Battleships{
         scanner.close();
     }
 
-    public void printModel(){
+    public void printModel(Orientation oriented){
         System.out.print("\n"+ SEPERATOR + " " + SEPERATOR);
 
         for(int y=0; y<this.ySize; y++){
@@ -38,10 +38,17 @@ public class Battleships{
             System.out.print(SEPERATOR + String.valueOf(x));
             for(int y=0; y<this.ySize; y++){
                 System.out.print(SEPERATOR);
-                State state = model[x][y].getState();
+                Cell<Ship> ship;
+                if (oriented==Orientation.FRIENDLY){
+                    ship = model[x][y].getFriendly();
+                }else { //enemy
+                    ship = model[x][y].getEnemy();
+                }
+
+                State state = ship.getState();
                 if(state==State.EMPTY || state==State.OCCUPIED){
                     if (state==State.OCCUPIED){
-                        System.out.print(String.valueOf(model[x][y].getObject().getHealth()));
+                        System.out.print(String.valueOf(ship.getObject().getHealth()));
                     }else {
                         System.out.print(" ");
                     }
@@ -60,10 +67,10 @@ public class Battleships{
     private void inistialiseModel(){
         for(int x=0; x<this.xSize; x++){
             for(int y=0; y<this.ySize; y++){
-                model[x][y] = new ShipCell();
+                model[x][y] = new DoubleShipCell();
             }
         }
-        printModel();
+        printModel(Orientation.FRIENDLY);
     }
 
     private void setShipRoutineComputer() {
@@ -73,7 +80,7 @@ public class Battleships{
         x = rand.nextInt(xSize);
         y = rand.nextInt(ySize);
 
-        if(model[x][y].getState()==State.OCCUPIED){
+        if(model[x][y].getEnemy().getState()==State.OCCUPIED){
         }
     }
 
@@ -91,17 +98,17 @@ public class Battleships{
                 System.out.print("Gib y: ");
                 y = scanner.nextInt();
             }
-            if(model[x][y].getState()==State.OCCUPIED){
+            if(model[x][y].getFriendly().getState()==State.OCCUPIED){
                 System.out.println("Cannot place a ship on another ship! Try again please!");
                 i-=1;
             }else{
                 Ship ship = new Ship(Orientation.FRIENDLY);
-                model[x][y].assignObject(ship);
+                model[x][y].getFriendly().assignObject(ship);
             }
             x=xSize;
             y=ySize;
         }
-        printModel();
+        printModel(Orientation.FRIENDLY);
     }
 
     private void guessRoutine(){
@@ -113,22 +120,21 @@ public class Battleships{
             System.out.print("Gib target y: ");
             yi = scanner.nextInt();
             guess(xi,yi);
-            printModel();
+            printModel(Orientation.ENEMY);
         }
-        printModel();
     }
 
     private void guess(int x, int y){
         bombsDropped+=1;
-        if(model[x][y].getState()==State.EMPTY){
-            model[x][y].miss();
+        if(model[x][y].getEnemy().getState()==State.EMPTY){
+            model[x][y].getEnemy().miss();
             System.out.println("*** MISS!");
-        }else if (model[x][y].getState()==State.OCCUPIED) {
-            model[x][y].getObject().decreaseHealth();
-            if (model[x][y].getObject().getHealth()==0){
+        }else if (model[x][y].getEnemy().getState()==State.OCCUPIED) {
+            model[x][y].getEnemy().getObject().decreaseHealth();
+            if (model[x][y].getEnemy().getObject().getHealth()==0){
                 ships-=1;
-                model[x][y].hit();
-                model[x][y].resetObject();
+                model[x][y].getEnemy().hit();
+                model[x][y].getEnemy().resetObject();
             }
             if (this.ships==0){
                 System.out.printf("*** HIT! YOU HAVE WON! Bombs used: %s", bombsDropped);

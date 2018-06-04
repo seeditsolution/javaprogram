@@ -30,7 +30,7 @@ public class Cell<T> {
         this.state = state;
     }
     public void resetCell() {
-        state=state.EMPTY;
+        state=State.EMPTY;
         object=null;
     }
     public void resetObject(){
