@@ -101,7 +101,7 @@ public class Battleships{
         int x=xSize;
         int y=ySize;
         for (int i=0;i<this.friendlyShips;i++){
-            System.out.printf("****** SHIP %s ******\n",String.valueOf(i+1));
+            System.out.printf("\n****** SHIP %s ******\n",String.valueOf(i+1));
             while(x>=xSize || x<0){
                 System.out.print("Gib x: ");
                 x = scanner.nextInt();
@@ -124,14 +124,20 @@ public class Battleships{
     }
 
     private void guessRoutine(){
-        int xi;
-        int yi;
+        int x = xSize;
+        int y = ySize;
         while (this.enemyShips != 0) {
-            System.out.print("Gib target x: ");
-            xi = scanner.nextInt();
-            System.out.print("Gib target y: ");
-            yi = scanner.nextInt();
-            guess(xi,yi);
+            while(x>=xSize || x<0){
+                System.out.print("Gib target x: ");
+                x = scanner.nextInt();
+            }
+            while(y>=ySize || y<0){
+                System.out.print("Gib target y: ");
+                y = scanner.nextInt();
+            }
+            guess(x,y);
+            x = xSize;
+            y = ySize;
             printModel(Orientation.ENEMY);
         }
     }
