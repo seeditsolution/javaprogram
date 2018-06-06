@@ -7,6 +7,7 @@ public class Battleships{
     private final int xSize;
     private final int ySize;
     private final static String SEPERATOR = "|";
+    private final static String PADDING = "********";
     private int enemyShips;
     private int friendlyShips;
     private Scanner scanner;
@@ -18,8 +19,8 @@ public class Battleships{
         this.ySize = y;
         this.friendlyShips = ships;
         this.enemyShips = ships;
-        model = new DoubleShipCell[x][y];
-        scanner = new Scanner(System.in);
+        this.model = new DoubleShipCell[x][y];
+        this.scanner = new Scanner(System.in);
 
         inistialiseModel();
         setShipRoutine();
@@ -30,7 +31,7 @@ public class Battleships{
     }
 
     public void printModel(Orientation oriented){
-        System.out.printf("\n****** %s ******\n",oriented);
+        System.out.printf("\n%s %s %s\n",PADDING,oriented,PADDING);
         System.out.print("\n"+ SEPERATOR + " " + SEPERATOR);
 
         for(int y=0; y<this.ySize; y++){
@@ -101,7 +102,7 @@ public class Battleships{
         int x=xSize;
         int y=ySize;
         for (int i=0;i<this.friendlyShips;i++){
-            System.out.printf("\n****** SHIP %s ******\n",String.valueOf(i+1));
+            System.out.printf("\n%s SHIP %s %s\n",PADDING,String.valueOf(i+1),PADDING);
             while(x>=xSize || x<0){
                 System.out.print("Gib x: ");
                 x = scanner.nextInt();
@@ -146,7 +147,7 @@ public class Battleships{
         bombsDropped+=1;
         if(model[x][y].getEnemy().getState()==State.EMPTY){
             model[x][y].getEnemy().miss();
-            System.out.println("*** MISS!");
+            System.out.printf("\n%s MISS!\n",PADDING);
         }else if (model[x][y].getEnemy().getState()==State.OCCUPIED) {
             model[x][y].getEnemy().getObject().decreaseHealth();
             if (model[x][y].getEnemy().getObject().getHealth()==0){
@@ -154,10 +155,11 @@ public class Battleships{
                 model[x][y].getEnemy().hit();
                 model[x][y].getEnemy().resetObject();
             }
+            System.out.printf("\n%s HIT! ",PADDING);
             if (this.enemyShips==0){
-                System.out.printf("*** HIT! YOU HAVE WON! Bombs used: %s", bombsDropped);
+                System.out.printf("YOU HAVE WON! Bombs used: %s", bombsDropped);
             }else{
-                System.out.printf("*** HIT! %s to go!\n",String.valueOf(this.enemyShips));
+                System.out.printf("%s to go!\n",String.valueOf(this.enemyShips));
             }
         }
     }
