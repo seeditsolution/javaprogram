@@ -127,6 +127,7 @@ public class Battleships{
     private void guessRoutine(){
         int x = xSize;
         int y = ySize;
+        Random rand = new Random();
         while (this.enemyShips != 0) {
             while(x>=xSize || x<0){
                 System.out.print("Gib target x: ");
@@ -136,24 +137,38 @@ public class Battleships{
                 System.out.print("Gib target y: ");
                 y = scanner.nextInt();
             }
-            guess(x,y);
+            guess(Orientation.FRIENDLY,x,y); //my orientation is friendly
             x = xSize;
             y = ySize;
+
+            guess(Orientation.ENEMY,rand.nextInt(xSize),rand.nextInt(ySize));
+
+            printModel(Orientation.FRIENDLY);
+
             printModel(Orientation.ENEMY);
         }
     }
 
-    private void guess(int x, int y){
+    private void guess(Orientation oriented, int x, int y){
+
+        Cell<Ship> shipCell;
+
+        if (oriented == Orientation.ENEMY) { //tries to kill friendlis. computer
+            shipCell = model[x][y].getFriendly();
+        }else { //tries to kill enemries. player
+            shipCell = model[x][y].getEnemy();
+        }
+
         bombsDropped+=1;
-        if(model[x][y].getEnemy().getState()==State.EMPTY){
-            model[x][y].getEnemy().miss();
+        if(shipCell.getState()==State.EMPTY){
+            shipCell.miss();
             System.out.printf("\n%s MISS!\n",PADDING);
-        }else if (model[x][y].getEnemy().getState()==State.OCCUPIED) {
-            model[x][y].getEnemy().getObject().decreaseHealth();
-            if (model[x][y].getEnemy().getObject().getHealth()==0){
+        }else if (shipCell.getState()==State.OCCUPIED) {
+            shipCell.getObject().decreaseHealth();
+            if (shipCell.getObject().getHealth()==0){
                 enemyShips-=1;
-                model[x][y].getEnemy().hit();
-                model[x][y].getEnemy().resetObject();
+                shipCell.hit();
+                shipCell.resetObject();
             }
             System.out.printf("\n%s HIT! ",PADDING);
             if (this.enemyShips==0){
