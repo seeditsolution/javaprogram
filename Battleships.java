@@ -101,6 +101,8 @@ public class Battleships{
     private void setShipRoutine() {
         int x=xSize;
         int y=ySize;
+        warning();
+
         for (int i=0;i<this.friendlyShips;i++){
             System.out.printf("\n%s SHIP %s %s\n",PADDING,String.valueOf(i+1),PADDING);
             while(x>=xSize || x<0){
@@ -124,10 +126,16 @@ public class Battleships{
         printModel(Orientation.FRIENDLY);
     }
 
+    private void warning() {
+        System.out.printf("%s x - Vertical numbers seen on the left %s\n",PADDING,PADDING);
+        System.out.printf("%s y - Horizontal numbers seen on the top %s\n",PADDING,PADDING);
+    }
+
     private void guessRoutine(){
         int x = xSize;
         int y = ySize;
         Random rand = new Random();
+        warning();
         while (this.enemyShips != 0) {
             while(x>=xSize || x<0){
                 System.out.print("Gib target x: ");
