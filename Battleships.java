@@ -10,8 +10,10 @@ public class Battleships{
     private final static String PADDING = "********";
     private int enemyShips;
     private int friendlyShips;
+    private int enemyBombsDropped=0;
+    private int friendlyBombsDropped=0;
+
     private Scanner scanner;
-    private int bombsDropped=0;
 
 
     public Battleships(int x,int y, int ships){
@@ -128,8 +130,7 @@ public class Battleships{
     private void guessRoutine(){
         int x = xSize;
         int y = ySize;
-        Random rand = new Random();
-        while (this.enemyShips != 0) {
+        while (this.enemyShips != 0 && this.friendlyShips !=0) {
             while(x>=xSize || x<0){
                 System.out.print("Gib target x: ");
                 x = scanner.nextInt();
@@ -139,15 +140,35 @@ public class Battleships{
                 y = scanner.nextInt();
             }
             guess(Orientation.FRIENDLY,x,y); //my orientation is friendly
+            check(this.enemyShips,Orientation.FRIENDLY);
             x = xSize;
             y = ySize;
 
-            guess(Orientation.ENEMY,rand.nextInt(xSize),rand.nextInt(ySize));
+            computerGuess();
+            check(this.friendlyShips,Orientation.ENEMY);
 
-            printModel(Orientation.FRIENDLY);
-
-            printModel(Orientation.ENEMY);
+            printModels();
         }
+    }
+
+    private void printModels() {
+        printModel(Orientation.FRIENDLY);
+        printModel(Orientation.ENEMY);
+    }
+
+    private void computerGuess(){
+        Random rand = new Random();
+
+        int x = rand.nextInt(xSize);
+        int y = rand.nextInt(ySize);
+        State state = model[y][x].getFriendly().getState();
+        while (state==State.MISS || state == State.HIT) {
+            x = rand.nextInt(xSize);
+            y = rand.nextInt(ySize);
+            state = model[y][x].getFriendly().getState();
+        }
+
+        guess(Orientation.ENEMY,x,y);
     }
 
     private void guess(Orientation oriented, int x, int y){
@@ -156,27 +177,54 @@ public class Battleships{
 
         if (oriented == Orientation.ENEMY) { //tries to kill friendlis. computer
             shipCell = model[y][x].getFriendly();
+            enemyBombsDropped+=1;
+
         }else { //tries to kill enemries. player
             shipCell = model[y][x].getEnemy();
+            friendlyBombsDropped+=1;
         }
 
-        bombsDropped+=1;
-        if(shipCell.getState()==State.EMPTY){
+        Ship shipObject = shipCell.getObject();
+        if(shipCell.getState()==State.EMPTY || shipCell.getState()==State.MISS ){
+            System.out.printf("\n%s MISS",PADDING);
+            if (shipCell.getState()==State.MISS ) {
+                System.out.printf(" AGAIN");
+            }
             shipCell.miss();
-            System.out.printf("\n%s MISS!\n",PADDING);
+            System.out.printf("! ");
+
         }else if (shipCell.getState()==State.OCCUPIED) {
-            shipCell.getObject().decreaseHealth();
-            if (shipCell.getObject().getHealth()==0){
-                enemyShips-=1;
+            shipObject.decreaseHealth();
+            if (shipObject.getHealth()==0){
+                if (oriented == Orientation.ENEMY) {
+                    friendlyShips-=1;
+                }else{
+                    enemyShips-=1;
+                }
                 shipCell.hit();
-                shipCell.resetObject();
+                // shipCell.resetObject();
             }
-            System.out.printf("\n%s HIT! ",PADDING);
-            if (this.enemyShips==0){
-                System.out.printf("YOU HAVE WON! Bombs used: %s", bombsDropped);
-            }else{
-                System.out.printf("%s to go!\n",String.valueOf(this.enemyShips));
-            }
+            System.out.printf("\n%s %s HIT! ",PADDING,shipObject.getOrientation());
+
+        }else if (shipCell.getState()==State.HIT) {
+            System.out.printf("\n%s ALREADY HIT! ",PADDING);
+
+        }
+    }
+
+    private void check(int count, Orientation oriented){
+        int bombsDropped;
+        if (oriented == Orientation.ENEMY) {
+            bombsDropped = friendlyBombsDropped;
+        }else{
+            bombsDropped = enemyBombsDropped;
+        }
+        if (count==0){
+            System.out.printf("%s HAS WON!\n%s%s bombs used: %s", oriented,PADDING, oriented, bombsDropped);
+            printModels();
+            System.exit(1);
+        }else{
+            System.out.printf("%s to go!\n",String.valueOf(count));
         }
     }
 }
