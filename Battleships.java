@@ -39,15 +39,15 @@ public class Battleships{
         }
         System.out.println();
 
-        for(int x=0; x<this.xSize; x++){
-            System.out.print(SEPERATOR + String.valueOf(x));
-            for(int y=0; y<this.ySize; y++){
+        for(int y=0; y<this.ySize; y++){
+            System.out.print(SEPERATOR + String.valueOf(y));
+            for(int x=0; x<this.xSize; x++){
                 System.out.print(SEPERATOR);
                 Cell<Ship> shipCell;
                 if (oriented==Orientation.FRIENDLY){
-                    shipCell = model[x][y].getFriendly();
+                    shipCell = model[y][x].getFriendly();
                 }else { //enemy
-                    shipCell = model[x][y].getEnemy();
+                    shipCell = model[y][x].getEnemy();
                 }
 
                 State state = shipCell.getState();
@@ -71,9 +71,9 @@ public class Battleships{
 
 
     private void inistialiseModel(){
-        for(int x=0; x<this.xSize; x++){
-            for(int y=0; y<this.ySize; y++){
-                model[x][y] = new DoubleShipCell();
+        for(int y=0; y<this.ySize; y++){
+            for(int x=0; x<this.xSize; x++){
+                model[y][x] = new DoubleShipCell();
             }
         }
         printModel(Orientation.FRIENDLY);
@@ -87,10 +87,10 @@ public class Battleships{
         for (int i=0;i<this.enemyShips;i++){
             x = rand.nextInt(xSize);
             y = rand.nextInt(ySize);
-            if(model[x][y].getEnemy().getState()==State.EMPTY){
+            if(model[y][x].getEnemy().getState()==State.EMPTY){
 
                 Ship ship = new Ship(Orientation.ENEMY);
-                model[x][y].getEnemy().assignObject(ship);
+                model[y][x].getEnemy().assignObject(ship);
 
             }
         }
@@ -101,7 +101,6 @@ public class Battleships{
     private void setShipRoutine() {
         int x=xSize;
         int y=ySize;
-        warning();
 
         for (int i=0;i<this.friendlyShips;i++){
             System.out.printf("\n%s SHIP %s %s\n",PADDING,String.valueOf(i+1),PADDING);
@@ -113,12 +112,12 @@ public class Battleships{
                 System.out.print("Gib y: ");
                 y = scanner.nextInt();
             }
-            if(model[x][y].getFriendly().getState()==State.OCCUPIED){
+            if(model[y][x].getFriendly().getState()==State.OCCUPIED){
                 System.out.println("Cannot place a ship on another ship! Try again please!");
                 i-=1;
             }else{
                 Ship ship = new Ship(Orientation.FRIENDLY);
-                model[x][y].getFriendly().assignObject(ship);
+                model[y][x].getFriendly().assignObject(ship);
             }
             x=xSize;
             y=ySize;
@@ -126,16 +125,10 @@ public class Battleships{
         printModel(Orientation.FRIENDLY);
     }
 
-    private void warning() {
-        System.out.printf("%s x - Vertical numbers seen on the left %s\n",PADDING,PADDING);
-        System.out.printf("%s y - Horizontal numbers seen on the top %s\n",PADDING,PADDING);
-    }
-
     private void guessRoutine(){
         int x = xSize;
         int y = ySize;
         Random rand = new Random();
-        warning();
         while (this.enemyShips != 0) {
             while(x>=xSize || x<0){
                 System.out.print("Gib target x: ");
@@ -162,9 +155,9 @@ public class Battleships{
         Cell<Ship> shipCell;
 
         if (oriented == Orientation.ENEMY) { //tries to kill friendlis. computer
-            shipCell = model[x][y].getFriendly();
+            shipCell = model[y][x].getFriendly();
         }else { //tries to kill enemries. player
-            shipCell = model[x][y].getEnemy();
+            shipCell = model[y][x].getEnemy();
         }
 
         bombsDropped+=1;
