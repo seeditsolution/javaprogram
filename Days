@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+class Days
+{
+void inp()
+{
+int d;
+System.out.println("enter number");
+Scanner s=new Scanner(System.in);
+d=s.nextInt();
+switch(d)
+{
+case 1:
+case 2:
+case 3:
+case 4:
+case 5:
+System.out.println("weekday");
+break;
+default:
+System.out.println("holiday");
+break;
+}
+}
+}
