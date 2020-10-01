@@ -1,0 +1,22 @@
+import java.util.Scanner;
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		String str = new String();
+		System.out.println("Enter your Str: ");
+		str = sc.nextLine();
+		//char c;
+		int count=0;
+		for(int i=0;i<str.length();i++)
+		{
+		//	c = str.charAt(i);
+			if(Character.isUpperCase(str.charAt(i)))
+			{
+				count++;
+			}
+		}
+		System.out.println("Total number of words that starts with capital letters: " + count);
+	}
+}
