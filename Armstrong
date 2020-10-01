@@ -1,0 +1,26 @@
+import java.util.*;
+public class Armstrong{
+	public static void main(String args[])
+	{
+		int num,result=0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a number to check whether it is an armstrong number or not-");
+		num=sc.nextInt();
+		
+		int original,rem,sum=0;
+		original=num;
+		while(num!=0)
+		{
+			rem=num%10;
+			sum=(rem*rem*rem)+sum;
+			num=num/10;
+		}
+		if (original==sum)
+		{
+			System.out.println("It is an armstrong number");
+		}
+		else{
+			System.out.println("It is not an armstrong number");
+		}
+	}
+}
