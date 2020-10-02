@@ -1,0 +1,23 @@
+import java.util.Scanner;
+class PalinRun
+{
+public static void main(String ar[])
+{
+int num,rev=0,rem,n;
+Scanner s=new Scanner(System.in);
+System.out.println("enter no");
+num=s.nextInt();
+n=num;
+do
+{
+rem=num%10;
+rev=rev*10+rem;
+num=num/10;
+}
+while(num>0);
+if(n==rev)
+System.out.println("no is palindrome");
+else
+System.out.println("no is not a palindrome ");
+}
+}
