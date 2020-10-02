@@ -1,0 +1,69 @@
+class  Account
+{
+	int accno,balance;
+	void chckbalance()
+	{
+		System.out.println("Your Balance is : "+balance);
+	}
+	void deposit(int value)
+	{
+		balance=balance+value;
+		System.out.println("Deposited successfully.");	
+	}
+	void withdraw(int value)
+	{
+		if (value>balance)
+		{
+			System.out.println("Insufficient balance.");			
+		}
+		else
+		{
+			balance=balance-value;
+			System.out.println("Withdrawl successfully.");	
+		}
+	}
+}
+class Saving extends Account
+{
+	double interestrate;
+	Saving(double value)
+	{
+		interestrate=value;
+	}
+}
+class Current extends Account
+{
+	int overdraftlimit;
+	Current(int value)
+	{
+		overdraftlimit=value;
+	}
+	void withdraw(int value)
+	{
+		if (value>balance && value>overdraftlimit)
+		{
+			System.out.println("Insufficient balance.");			
+		}
+		else
+		{
+			balance=balance-value;
+			System.out.println("Withdrawl successfully.");	
+		}
+	}
+}
+public class p15
+{
+	public static void main(String[] args) {
+
+	Saving s=new Saving(2.5);
+	Current c=new Current(100);
+	s.deposit(500);
+	s.chckbalance();
+	c.deposit(300);
+	c.chckbalance();
+	s.withdraw(200);
+	s.chckbalance();
+	c.withdraw(350);
+	c.chckbalance();
+	}
+}
