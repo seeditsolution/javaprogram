@@ -1,0 +1,15 @@
+class Main {
+   private int x;
+
+   // constructor
+   private Main(){
+       System.out.println("Constructor Called");
+       x = 5;
+   }
+
+   public static void main(String[] args){
+       // constructor is called while creating object
+       Main obj = new Main();
+       System.out.println("Value of x = " + obj.x);
+   }
+}
