@@ -1,0 +1,23 @@
+class CarClass
+{
+  public int speed_Limit()
+  {
+    return 100;
+  }
+  }
+class Ford extends CarClass
+{
+  public int speed_Limit()
+  {
+    return 150;
+  }
+}
+class Override
+{
+  public static void main(String args[])
+  {
+    CarClass obj=new Ford();
+    int num=obj.speed_Limit();
+    System.out.println("Speed Limitis : "+num);  
+  }
+}
