@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        Scanner bufferedReader = new Scanner(System.in);
+        System.out.println("Enter dividend string");
+        String s = bufferedReader.nextLine();
+        
+        System.out.println("Enter divisor string");
+        String t = bufferedReader.nextLine();
+        
+ 
+
+        int result = Result.findSmallestDivisor(s, t);
+          System.out.println(result);
+    }
+}
+
+
+class Result {
+
+    /*
+     * Complete the 'findSmallestDivisor' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. STRING s
+     *  2. STRING t
+     */
+
+    public static int findSmallestDivisor(String s, String t) {
+        
+	if(s.length() % t.length() > 0)
+		return -1;
+	StringBuilder sb = new StringBuilder();
+	for(int i=0;i*t.length() < s.length();i++) {
+		sb.append(t);
+	}
+	if(!sb.toString().equals(s))
+		return -1;
+		
+	int divisible = 1;
+	
+	for(int i=1;i<=t.length();i++) {
+	    
+	    //optimized solution for skipping a few unrequired iterations
+	   if(t.length()%divisible++ != 0) {
+	        continue;
+	    }
+	     
+	     
+		sb = new StringBuilder();
+		String subStr = t.substring(0, i);
+		while(sb.length() < t.length()) {
+			sb.append(subStr);
+		}
+		if(sb.toString().equals(t))
+			return i;
+	}
+	return -1;
+
+    }
+
+}
