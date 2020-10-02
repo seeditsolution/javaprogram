@@ -1,0 +1,35 @@
+public class Solution {
+
+
+    static int max(int a, int b) { return (a > b)? a : b; } 
+
+
+    public static int knapsack(int[] weight,int value[],int maxWeight, int n){
+        /* Your class should be named Solution.
+		* Don't write main() function.
+		* Don't read input, it is passed as function argument.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/	
+
+        int i, w; 
+        int K[][] = new int[n+1][maxWeight+1]; 
+
+        // Build table K[][] in bottom up manner 
+        for (i = 0; i <= n; i++) 
+        { 
+            for (w = 0; w <= maxWeight; w++) 
+            { 
+                if (i==0 || w==0) 
+                    K[i][w] = 0; 
+                else if (weight[i-1] <= w) 
+                    K[i][w] = max(value[i-1] + K[i-1][w-weight[i-1]],  K[i-1][w]); 
+                else
+                    K[i][w] = K[i-1][w]; 
+            } 
+        } 
+
+        return K[n][maxWeight]; 
+
+    }
+}
