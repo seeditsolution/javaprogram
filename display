@@ -1,0 +1,18 @@
+import java.util.Scanner;
+class Student{
+ String name;
+ int rollno;
+ void display(){
+ System.out.println("Student name: "+name+"\nRollno: "+rollno);
+ }
+ }
+ class Sdemo{
+  public static void main(String args[]){
+    Scanner ob=new Scanner(System.in);
+    Student s=new Student();
+    System.out.println("Enter student details");
+    s.name=ob.nextLine();
+    s.rollno=ob.nextInt();
+    s.display();
+    }
+    }
