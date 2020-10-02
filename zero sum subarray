@@ -1,0 +1,21 @@
+import java.util.*;
+
+// n<10^5 where n is the size of the given array. (solution around 0(n))
+
+public class ZeroSumSubarray {
+    public static void main(String[] args) {
+        int sum=0;
+        boolean found=false;
+        int arr[]={2,3,1,-6,6,1};
+        Set<Integer> s=new HashSet<>();
+        for(int ele:arr){
+            s.add(sum);
+            sum+=ele;
+            if(s.contains(sum)){
+                found=true;
+                break;
+            }
+        }
+       System.out.println(found);
+    }
+}
