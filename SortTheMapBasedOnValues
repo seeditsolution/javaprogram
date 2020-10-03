@@ -1,0 +1,47 @@
+package com.code;
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+public class SortMaponvalues {
+//sorting the map entries based on the values
+	public static void main(String[] args) {
+	Scanner o=new Scanner(System.in);
+	int n=o.nextInt();
+	int ar[]=new int[n];
+	for(int i=0;i<n;i++) {
+		ar[i]=o.nextInt();
+	}
+	HashMap<Integer, Integer>map=new LinkedHashMap<>();
+	for(int i=0;i<n;i++) {
+		if(!map.containsKey(ar[i])) {
+			map.put(ar[i],1);
+		}
+		else {
+			map.put(ar[i],map.get(ar[i])+1);
+		}
+	}
+	System.out.println(map);
+	LinkedList<Entry<Integer, Integer>>list=new LinkedList<>(map.entrySet());
+	Collections.sort(list,new Comparator<Map.Entry<Integer, Integer>>() {
+		@Override
+		public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
+			// TODO Auto-generated method stub
+			return o2.getValue().compareTo(o1.getValue());
+		}
+	});
+System.out.println(list);
+int k=o.nextInt();
+int arr[]=new int[k];
+for(int i=0;i<k;i++) {
+	arr[i]=list.get(i).getKey();
+System.out.println(arr[i]);
+}
+}
+}
