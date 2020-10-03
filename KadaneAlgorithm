@@ -1,0 +1,120 @@
+package com.code;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class KADANE {
+	 static void kadane(int ar[]) {
+		 int max=Integer.MIN_VALUE;
+		 int csum=0;
+		 int msum=0;
+		 for(int i=0;i<ar.length;i++) {
+			 csum=csum+ar[i];
+			 if(csum<ar[i]) {
+				 csum=ar[i];
+			 }
+			 max=Math.max(csum,max);
+		 }
+		 System.out.println(max);
+	}
+	static int down(int n,int count) {
+		if(n==0) {
+			count++;
+			return 1;
+		}
+		else if(n<0) {
+			return 0;
+		}
+		else {
+			return (count+down(n-2,count)+down(n-1,count)); 
+		}
+	}
+//	static int down(int n,int count){
+//	//min no of steps to reach bottom	
+//		if (n<=0) {
+//			 return count;
+//		 }
+//		 else {
+//			 count++;
+//			// System.out.println(count);
+//			 return Math.min(down(n-1,count), down(n-2,count));
+//		 }
+//	 }
+	public static boolean check(String s){
+	    int i=0;
+	    int j=s.length()-1;
+	    while(i<j){
+	      if(s.charAt(i)!=s.charAt(j)){
+	        return false;
+	      }
+	      i++;
+	      j--;
+	    }
+	    return true;
+	  }
+public static void main(String[] args) {
+	//int ar4[]= {-2, -3, 4, -1, -2, 1, 5, -3};
+	//kadane(ar);
+	int n=3;
+	Scanner o=new Scanner(System.in);
+	int t=o.nextInt();
+	while(t>0) {
+		//--plus whther string to can be formed from string 1 upon its consumption wholly
+		String s=o.next();
+		String st=o.next();
+		if(st.length()>s.length()) {
+			System.out.println("NO");
+			t--;
+			continue;
+		}
+		else if(s.length()==st.length()) {
+			boolean ans=true;
+			for(int i=0;i<s.length();i++) {
+				if(s.charAt(i)!=st.charAt(i)) {
+					ans=false;
+					break;
+				}
+			}
+			if(ans)
+				System.out.println("YES");
+			else
+				System.out.println("NO");
+			t--;
+			continue;
+		}
+		else {
+		int count=0;
+		int i=0;
+		int j=0;
+		boolean f=true;
+		while(i<s.length()&&j<st.length()) {
+			if(s.charAt(i)!=st.charAt(j)) {
+				if(i==s.length()-1&&j==st.length()-1) {
+					if(s.charAt(i)!=st.charAt(j))
+					{f=false;
+					break;
+					}
+				}
+				if(st.charAt(j)=='+'&&s.charAt(i+1)=='-') {
+					i=i+2;
+					j=j+1;
+				}
+				else {
+					f=false;
+					break;
+				}	
+			}
+			else {
+				i++;
+				j++;
+			}
+		}
+		if(f)
+			System.out.println("YES");
+		else
+			System.out.println("NO");
+		t--;
+		}
+	}
+}
+}
