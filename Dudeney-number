@@ -1,0 +1,23 @@
+import java.util.*;
+public class Dudeney
+{
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a number to check whether it is a Dudeney number or not :");
+int a=sc.nextInt();
+int s=a;
+int q=0,d=0;
+while(a>0)
+{
+q=a%10;
+d=d+q;
+a=a/10;
+}
+int f=d*d*d;
+if(f==s)
+System.out.println(s+ " is a Dudeney number");
+else
+System.out.println(s+ " is not a Dudeney number");
+}
+}
