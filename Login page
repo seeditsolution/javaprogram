@@ -1,0 +1,93 @@
+<html>
+<head>  <title> Login Form </title>
+    
+    <style>
+        *{
+              margin: 0;
+              padding: 0;
+              outline: none;
+              box-sizing: border-box;
+              font-family: 'Poppins', sans-serif;
+        }
+        
+        body{
+            
+            background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+            
+        }
+        div{
+            border: 2px solid white;
+            width: 400px;
+            height: 400px;
+            padding: 10px;
+            margin-left: 500px;
+            margin-top: 100px;
+            background: white;
+        }
+        button{
+                height: 50px;
+                width: 300px;
+                background: linear-gradient(115deg, #56e4a2 10%, #ea0113 90%);
+                border: none;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                cursor: pointer;
+        }
+        img{
+            width: 380px;
+            height: 50px;
+        }
+        h3{
+            margin-left: 30px;
+        }
+        h3 input{
+            width: 300px;
+            height: 30px;
+            
+            
+        }
+        h5{
+            margin: 30px;
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+        a{
+            font-family:sans-serif;
+            font-size: 15px;
+        }
+        input{
+             background: linear-gradient(115deg, #e49d56 10%, #fff 90%); 
+             border: none;
+             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+             
+        }
+       
+        a{
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+    </style>
+    </head>
+    <body>
+        
+    
+        <div><img src="stark.jpeg">
+            <h3>E-mail or Phone <br><input type="text">
+            <br><br>
+             Password <br><input type="text"><br>
+            </h3>
+            <h5>
+            <a href="#">Forgoten Password?</a><br><br>
+            
+            <button>Login</button><br><br>
+            new user <a href="#">Registration</a>
+            </h5>
+        </div>
+    
+    </body>
+</html>
