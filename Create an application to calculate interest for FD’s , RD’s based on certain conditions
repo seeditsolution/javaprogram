@@ -1,0 +1,224 @@
+package Anmol;
+import java.util.Scanner;
+
+public class InterestCalculator {
+
+public static void main(String[] args) {
+        Scanner sc = newScanner(System.in);
+System.out.println("SELECT THE OPTIONS " + "\n1." + " Interest Calculator-SB" + " \n2." + " Interest Calculator-FD" + "\n3." + " InterestCalculator-RD" + "\n4 " + " Exit");
+intchoice = sc.nextInt();
+
+switch (choice) {
+case 1:
+SBaccountsb = newSBaccount();
+try {
+System.out.println("Enter the Average SB amount ");
+Double amount = sc.nextDouble();
+System.out.println("Interest gained is : Rs " + sb.calculateInterest(amount));
+
+                } catch (InvalidAmountExceptione) {
+System.out.println("Exception : Invalid amount");
+                }
+break;
+
+case 2:
+try {
+FDaccountfd = newFDaccount();
+System.out.println("Enter the FD Amount");
+doublefAmount = sc.nextDouble();
+System.out.println("Interest gained is: Rs " + fd.calculateInterest(fAmount));
+                } catch (InvalidAgeExceptione) {
+System.out.println("Invalid Age Entered");
+                } catch (InvalidAmountExceptione) {
+System.out.println("Invalid Amount Entered");
+
+                } catch (InvalidDaysExceptione) {
+System.out.println("Invalid Days Entered");
+
+                }
+
+break;
+case 3:
+try {
+RDaccountrd = newRDaccount();
+System.out.println("Enter the RD amount");
+doubleRamount = sc.nextDouble();
+System.out.println("Interest gained is: Rs " + rd.calculateInterest(Ramount));
+                } 
+catch (InvalidAgeExceptione) {
+System.out.println("Invalid Age Entered");
+                } catch (InvalidAmountExceptione) {
+System.out.println("Invalid Amount Entered");
+
+                } catch (InvalidMonthsExceptione) {
+System.out.println("Invalid Days Entered");
+                }
+
+break;
+
+case 4:
+System.out.println("DO YOU WANT TO CALCULATE AGAIN ????" + " "
+                        + "RUN AGAIN THE PROGRAM");
+default:
+System.out.println("Wrong choice");
+
+        }
+sc.close();
+    }
+
+}
+
+abstractclass Account {
+double interestRate;
+double amount; 
+abstractdouble calculateInterest (doubleamount) throws InvalidMonthsException,InvalidAgeException,InvalidAmountException ,InvalidDaysException;
+}
+
+Class FDaccount extends Account {
+
+Double FDinterestRate;
+Double FDAmount;
+Int noOfDays;
+Int ageOfACHolder;
+Double General, SCitizen;
+    Scanner FDScanner = newScanner(System.in);
+
+Double calculateInterest(doubleamount) throws InvalidAgeException,InvalidAmountException,InvalidDaysException {
+this.FDAmount = amount;
+
+System.out.println("Enter FD days");
+noOfDays = FDScanner.nextInt();
+System.out.println("Enter FD age holder ");
+ageOfACHolder = FDScanner.nextInt();
+if (amount< 0) {
+thrownewInvalidAmountException();
+        }
+if(noOfDays<0){
+thrownewInvalidDaysException();
+        }
+if(ageOfACHolder<0){
+thrownewInvalidAgeException();
+        }
+if (amount< 10000000) {
+if (noOfDays>= 7 &&noOfDays<= 14) {
+General = 0.0450;
+SCitizen = 0.0500; }
+elseif (noOfDays>= 15 &&noOfDays<= 29) {
+General = 0.0470;
+SCitizen = 0.0525;
+            } elseif (noOfDays>= 30 &&noOfDays<= 45) {
+General = 0.0550;
+SCitizen = 0.0600;
+            } elseif (noOfDays>= 45 &&noOfDays<= 60) {
+General = 0.0700;
+SCitizen = 0.0750;
+            } elseif (noOfDays>= 61 &&noOfDays<= 184) {
+General = 0.0750;
+SCitizen = 0.0800;
+            } elseif (noOfDays>= 185 &&noOfDays<= 365) {
+General = 0.0800;
+SCitizen = 0.0850;
+            }
+FDinterestRate = (ageOfACHolder< 50) ?General :SCitizen;
+        } else {
+if (noOfDays>= 7 &&noOfDays<= 14) {
+interestRate = 0.065;
+            } elseif (noOfDays>= 15 &&noOfDays<= 29) {
+interestRate = 0.0675;
+            } elseif (noOfDays>= 30 &&noOfDays<= 45) {
+interestRate = 0.00675;
+            } elseif (noOfDays>= 45 &&noOfDays<= 60) {
+interestRate = 0.080;
+            } elseif (noOfDays>= 61 &&noOfDays<= 184) {
+interestRate = 0.0850;
+            } elseif (noOfDays>= 185 &&noOfDays<= 365) {
+interestRate = 0.10;
+            }
+        }
+
+returnFDAmount * FDinterestRate;
+    }
+}
+classInvalidAgeExceptionextendsException{}    
+
+classInvalidAmountExceptionextendsException{}    
+
+classInvalidDaysExceptionextendsException{}    
+
+classInvalidMonthsExceptionextendsException{}   
+
+classRDaccountextends Account {
+
+doubleRDInterestRate;
+doubleRDamount;
+intnoOfMonths;
+doublemonthlyAmount;
+doubleGeneral, SCitizen;
+    Scanner RDScanner = newScanner(System.in);
+
+
+doublecalculateInterest(doubleRamount) throwsInvalidMonthsException,InvalidAmountException ,InvalidAgeException {
+this.RDamount = Ramount;
+System.out.println("Enter RD months");
+noOfMonths = RDScanner.nextInt();
+System.out.println("Enter RD holder age");
+intage = RDScanner.nextInt();
+if (RDamount< 0) {
+thrownewInvalidAmountException();
+        }
+if(noOfMonths<0){
+thrownewInvalidMonthsException();
+        }
+if(age<0){
+thrownewInvalidAgeException();
+        }
+if (noOfMonths>= 0 &&noOfMonths<= 6) {
+General = .0750;
+SCitizen = 0.080;
+        } elseif (noOfMonths>= 7 &&noOfMonths<= 9) {
+General = .0775;
+SCitizen = 0.0825;
+        } elseif (noOfMonths>= 10 &&noOfMonths<= 12) {
+General = .0800;
+SCitizen = 0.0850;
+        } elseif (noOfMonths>= 13 &&noOfMonths<= 15) {
+General = .0825;
+SCitizen = 0.0875;
+        } elseif (noOfMonths>= 16 &&noOfMonths<= 18) {
+General = .0850;
+SCitizen = 0.0900;
+        } elseif (noOfMonths>= 22) {
+General = .0875;
+SCitizen = 0.0925;
+        }
+RDInterestRate = (age< 50) ?General :SCitizen;
+returnRDamount * RDInterestRate;
+
+    }
+
+}
+classSBaccountextends Account {
+doubleSBamount ,SbInterestRate, interest;
+    Scanner SBScanner = newScanner(System.in);
+
+
+Double calculateInterest(double amount) throws Invalid AmountException{
+this.SBamount = amount;
+if(SBamount< 0 ){
+thrownew Invalid AmountException();
+        }
+System.out.println("Select account type \n1. NRI \n2. Normal ");
+Int account Choice = SBScanner.nextInt();
+switch (account Choice) {
+case 1:
+SbInterestRate = .06;
+break;
+case 2:
+SbInterestRate = .04;
+break;
+default:
+System.out.println("Please choose right account again");
+
+        }
+return amount * SbInterestRate;
+}}
