@@ -1,0 +1,19 @@
+public class ExceptionHandling {
+
+   public static void main(String args[]) {
+      int a[] = new int[3];
+      try {
+         System.out.println("Access element three :" + a[4]);
+      } catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("Exception thrown  :" + e);
+      }finally {
+         a[0] = 6;
+         a[1] = 7;
+         a[2] = 8;
+         for(int i=0; i < a.length; i++ ){
+         System.out.println("The element value at index " + i + " is: " + a[i]);
+        }
+        System.out.println("The finally statement is executed");
+      }
+   }
+}
