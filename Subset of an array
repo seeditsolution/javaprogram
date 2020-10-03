@@ -1,0 +1,31 @@
+package array;
+
+import java.util.Scanner;
+
+public class Subset {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int size = sc.nextInt();
+		int[] arr1 = new int[size];
+		for(int i = 0; i < arr1.length; i++) {
+			arr1[i]= sc.nextInt();
+		}
+		int limit = (int)Math.pow(2, arr1.length);
+		for(int i = 0; i <limit; i++) {
+			String set = "";
+			int temp = i;
+			for(int j = arr1.length-1; j>=0; j--) {
+				int r = temp %2;
+				temp = temp/2;
+				if(r == 0) {
+					set = "-"+" " + set;
+				}else {
+					set = arr1[j]+ " "+ set;
+				}
+			}
+			System.out.println(set);
+		}
+	}
+
+}
