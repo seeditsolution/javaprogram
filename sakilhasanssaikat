@@ -1,0 +1,7 @@
+<p onclick="myFunction(this, 'red')">Click me to change my text color.</p>
+
+<script>
+function myFunction(elmnt,clr) {
+  elmnt.style.color = clr;
+}
+</script>
