@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class Fibo_DP {
+	public static void main(String[] args) throws Exception {
+		System.out.println("Enter the value");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int j = 0;
+		int[] gb = new int[n + 1];
+		int fibn = fib1(n, gb);
+		System.out.println(fibn);
+	}
+ 
+	public static int fib1(int n, int[] gb) {
+		if (n == 0 || n == 1) {
+			return n;
+		}
+		if (gb[n] != 0) { 
+			return gb[n];
+		}
+		System.out.println("Hello" + n);
+		int fibo1 = fib1(n - 1, gb);
+		int fibo2 = fib1(n - 2, gb);
+		int fibn = fibo1 + fibo2;
+		gb[n] = fibn;
+		return fibn;
+	}
+}
