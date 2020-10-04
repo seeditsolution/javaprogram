@@ -1,0 +1,12 @@
+plan
+
+inistialise the grid - DONE
+place the models - DONE
+start taking user input to kill them - DONE
+ai input to kill user
+give feedback on it - DONE
+change hit system to not hit the user/tell user they messed up.
+show user ships but not enemy ships.
+make changes to guess to make sure both models are changed
+
+try to have gui for it
