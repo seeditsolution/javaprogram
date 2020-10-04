@@ -1,0 +1,32 @@
+import java.util.*;  
+  
+class subsequanceWithNegativePtoduct  
+{  
+    
+static int countsubseq(int arr[], int n)  
+{  
+    int positiveCount = 0;  
+    int negativeCount = 0;  
+    int result;  
+    for (int i = 0; i < n; i++)  
+    {  
+        if (arr[i] > 0)  
+            positiveCount++;  
+        if (arr[i] < 0)  
+            negativeCount++;  
+    }   
+    result = (int) Math.pow(2, positiveCount);   
+    if (neg_count > 0)  
+        result *= Math.pow(2, negativeCount - 1);  
+    else
+        result = 0 ; 
+    return result;  
+}  
+  
+public static void main(String[] args)  
+{  
+    int arr[] = { 2,-5, -2, 10, 6, -7 };    
+    int negativeProd = countsubseq(arr, arr.length);  
+}  
+}  
+  
