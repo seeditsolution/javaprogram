@@ -1,0 +1,15 @@
+public class reverse
+{
+public static void main(String args[])
+{
+ int n=1234,rem,store=0;
+ int b=n;
+ while(n!=0)
+ {
+ rem=n%10;
+ store=store*10+rem;
+ n=n/10;
+ }
+ System.out.println(b+" reverse number is : "+store);
+}
+}
