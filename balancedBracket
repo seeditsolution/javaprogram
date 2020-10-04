@@ -1,0 +1,47 @@
+import java.io.*;
+import java.lang.reflect.Array;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Stacks {
+
+    static String balancedBracket(String expression) {
+
+        Stack<Character> s = new Stack<>();
+        char[] brackets = expression.toCharArray();
+        for (char c : brackets) {
+            if (c == '{')
+                s.push('}');
+            else if (c == '[')
+                s.push(']');
+            else if (c == '(')
+                s.push(')');
+            else {
+                if (s.empty() || c != s.peek())
+                    return "NO";
+                s.pop();
+            }
+        }
+        return s.empty() ? "YES" : "NO";
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.print("Enter no. of testcases : ");
+        int t = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < t; i++) {
+            System.out.print("Enter testcase expression" + i + " : ");   // like testcase0: {{[]{}()}()}
+            String exp = scanner.nextLine();
+            System.out.println(balancedBracket(exp));
+        }
+        scanner.close();
+    }
+}
