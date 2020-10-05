@@ -1,0 +1,163 @@
+
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+struct dict
+{
+    char w[10];
+    char meaning[10];
+};
+
+dict d[27];
+int flag[27],chain[27];
+void init()
+{
+    for(int i=0;i<28;i++)
+     {
+         flag[i]=0;
+         chain[i]=-1;
+     }
+}
+int hash1(char w[10])
+{
+    if(w[0]>='A' && w[0]<='Z')
+        return(w[0]-65);
+    if(w[0]>='a' && w[0]<='z')
+        return(w[0]-97);
+}
+void print()
+{
+    for(int i=0;i<26;i++)
+        cout<<d[i].w<<"===="<<d[i].meaning<<endl;
+
+}
+
+void insert(char word[10],char mean[10])
+{
+
+ int loc=0,j,in;
+
+ loc=hash1(word);
+ cout<<loc;
+ if(flag[loc]==0)
+ {
+     strcpy(d[loc].w,word);
+     strcpy(d[loc].meaning,mean);
+     flag[loc]=1;
+ }
+ else
+ {
+     j=loc;in=0;
+     while(flag[j]==1 && in<26)
+     {
+           j=(j+1)%26;
+           in++;
+     }
+     if(in==26)
+     cout<<"hashtable is full";
+     else
+     {
+      if(hash1(word)==hash1(d[loc].w))
+      {
+          strcpy(d[j].w,word);
+          strcpy(d[j].meaning,mean);
+            flag[j]=1;
+
+
+            while(chain[loc]!=-1)
+              loc=chain[loc];
+
+        chain[loc]=j;
+      }
+      else
+      {
+          strcpy(d[j].w,d[loc].w);
+          strcpy(d[j].meaning,d[loc].meaning);
+         flag[j]=1;
+
+         strcpy(d[loc].w,word);
+         strcpy(d[loc].meaning,mean);
+
+         int n;
+         n=hash1(d[j].w);
+
+        while(chain[n]!=loc)
+           n=chain[n];
+
+         chain[n]=chain[loc];
+
+         chain[loc]=-1;
+
+        n=hash1(d[j].w);
+           while(chain[n]!=-1)
+            n=chain[n];
+
+             chain[n]=j;
+      }
+     }
+ }
+ }
+void search()
+{
+    char x[10];
+    int j;
+    cout<<"enter data to search";
+    cin>>x;
+
+       //for(i=0;i<10;i++)
+
+           int loc=hash1(x);
+           j=0;int flag=0;
+           while(strcmp(d[loc].w,x)!=0 && j<26 )
+           {
+               if(hash1(x)==hash1(d[loc].w))
+                {
+                   if(chain[loc]!=-1)
+                   loc=chain[loc];
+                   else
+                   {
+                   cout<<"data not present";
+                   flag=1;
+                   break;
+                    }
+                }
+               else
+               {
+
+                 cout<<"\n data not present in hash table";
+                 flag=1;
+                 break;
+               }
+           }
+           if(flag==0)
+               cout<<"data present at"<<loc;
+
+}
+int main()
+{
+  int ch;
+  init();
+  char w[10],m[10];
+  do
+  {
+
+    cout<<"\n 1. Insert word";
+    cout<<"\n 2. Print dictionary";
+    cout<<"\n 3. Search Word in dictionary";
+    cout<<"\n Enter your choice";
+    cin>>ch;
+    switch(ch)
+    {
+    case 1: cout<<"\n Enter the word and meaning to insert in dictionary";
+            cin>>w>>m;
+            insert(w,m);
+            break;
+    case 2: print();
+            break;
+    case 3: search();
+            break;
+    }
+  }while(ch<4);
+}
