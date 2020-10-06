@@ -1,0 +1,25 @@
+public class PerfectNumber {
+	public static void main(String[] args) {
+		for(int i=1;i<=1000;i++) {
+			try {
+				getPerfectNumber(i);
+			}
+			catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void getPerfectNumber(int number) throws InterruptedException{
+		int sum = 0;
+		for(int i=1;i<number;i++)
+		{
+			if(number%i==0) {
+				sum = sum + i;
+			}
+		}
+	 if(sum==number) {
+		System.out.println(number);
+		Thread.sleep(5000);
+	}
+	}
+}
