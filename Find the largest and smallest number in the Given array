@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class AithmeticTrial {
+
+	public static void main(String[] args) {
+			
+		  int[] arr = {2,4,5,1,3,9,8,7};
+		  int small =arr[0];
+		  int large=arr[0];
+		  for(int i =1;i<arr.length;i++) {
+			  if(small>arr[i]) {
+				  small= arr[i];
+				  
+			  }
+			  if(large <arr[i]) {
+				  large=arr[i];
+			  }
+		  }
+		  System.out.println(large +" "+ small);
+}
+
+}
