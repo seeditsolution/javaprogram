@@ -1,0 +1,36 @@
+// Program to Calculate Marks of CBSE in Presentage(%)
+import java.util.Scanner;
+
+public class j_5 {
+    public static void main(String[] args) {
+        System.out.println("Calculating students marks in percentage:");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Marks in Mathematics: ");
+        int a = sc.nextInt();
+
+        System.out.print("Marks in Physics: ");
+        int b = sc.nextInt();
+
+        System.out.print("Marks in Chemistry: ");
+        int c = sc.nextInt();
+
+        System.out.print("Marks in English: ");
+        int d = sc.nextInt();
+
+        System.out.print("Marks in Hindi: ");
+        int e = sc.nextInt();
+
+        float Total = a+b+c+d+e;
+        System.out.print("Total marks is: ");
+        System.out.println(Total);
+
+        System.out.print("Enter the whole Examination marks: ");
+        int whole_marks = sc.nextInt();
+
+        float percentage = (Total * 100)/whole_marks;
+        System.out.print("Marks in percentage:  ");
+        System.out.print(percentage);
+
+
+    }
+}
