@@ -1,0 +1,10 @@
+function retirement(firstName, year) {
+  function calculateAge(birthYear) {
+    return 2020 - birthYear;
+  }
+
+  let age = calculateAge(2001);
+  let retirementYear = 65 - age;
+  console.log(firstName + " retires in " + retirementYear + " year");
+}
+retirement("Mehedi Islam Ripon", 2001);
