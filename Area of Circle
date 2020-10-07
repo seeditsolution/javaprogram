@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class AreaOfCircle {
    public static void main(String args[]){
+   try{
       int radius;
       double area;
       Scanner sc = new Scanner(System.in);
@@ -8,5 +9,7 @@ public class AreaOfCircle {
       radius = sc.nextInt();
       area = (radius*radius)*Math.PI;
       System.out.println("Area of the circle is ::"+area);
+   }catch(Exception e){
+      System.out.printl(e);
    }
 }
