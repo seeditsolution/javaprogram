@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Challenge {
+	public static String[] bucketize(String phrase, int n) {
+		ArrayList<String> buckets = new ArrayList<String>();
+		
+		String[] tokens = phrase.split(" ");
+		
+		int currentTally = 0;
+		int currentBucket = 0;
+		for(int i = 0; i < tokens.length; i++) {
+			if(tokens[i].length() > n) continue;
+
+			if(currentTally == 0 && tokens[i].length() <= n) {
+				buckets.add(tokens[i]);
+				currentTally+= tokens[i].length();
+			} else if(currentTally > 0 && currentTally + tokens[i].length()+1 <= n) {
+				String bucketString = buckets.get(currentBucket);
+				bucketString+= " " + tokens[i];
+				buckets.set(currentBucket, bucketString);
+				currentTally+= tokens[i].length() + 1;
+			} else {
+				currentTally = 0;
+				currentBucket++;
+				i--;
+				continue;
+			}
+		}
+		
+		return buckets.toArray(new String[0]);
+	}
+}
