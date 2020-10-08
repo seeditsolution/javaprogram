@@ -1,0 +1,37 @@
+package arrays;
+
+import java.util.Scanner;
+
+public class InsertionSort {
+
+	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int a[] = new int[n];
+		for(int i = 0; i < n; i++) {
+			a[i] = input.nextInt();
+		}
+		insertionSortRecursive(a, n);
+		for(int x : a) {
+			System.out.print(x+" ");
+		}
+		input.close();
+	}
+	
+	 public static void insertionSortRecursive(int a[], int n) {
+		if(n <= 1) return;
+		
+		insertionSortRecursive(a, n-1);
+		int last = a[n-1];
+		int j = n-2;
+		while(j >= 0 && a[j] > last) {
+			a[j+1] = a[j];
+			j--;
+		}
+		a[j+1] = last;
+		for(int x : a) {
+			System.out.print(x+" ");
+		}System.out.println();
+	}
+}
