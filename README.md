@@ -1,6 +1,7 @@
-# javaprogram 
-class test()
-public static void main (string []args)
-{
-system.out.println("seed it solution")
-}
+
+# java program --- Hacktoberfest2020
+
+
+## Make your First pull Request to win free Swag and tee and get hands on experience to contribute in Opensourse
+
+
