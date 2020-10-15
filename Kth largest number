@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Main{
+
+static int kthLargest(int arr[], int size, int k)
+{
+    int temp = 0;
+  int result =0;
+    for(int i=0;i<size;i++)
+    {
+      for(int j=i+1;j<size;j++)
+      {
+        if(arr[i]>arr[j])
+        {
+          temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+  for(int i=0;i<size;i++){
+    if(k==i){
+      result = arr[size-1-i];
+      break;
+    }
+  }
+  return result;
+}
+
+public static void main(String[] args){
+ Scanner sc = new Scanner(System.in);
+ int k = sc.nextInt();
+ int size = sc.nextInt();
+ int arr[] = new int[size];
+ for(int i=0;i<size;i++){
+ arr[i]=sc.nextInt();
+ int result= kthLargest(arr, size, k);
+ System.out.println(result);
+ }
+ 
+
+}

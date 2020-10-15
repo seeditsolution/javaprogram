@@ -1,0 +1,6 @@
+Obj = {
+Name : "Samir",
+Age : 20,
+Job : "A Softwareengineer"
+}
+ Console.log (obj);

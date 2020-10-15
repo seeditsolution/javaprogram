@@ -1,0 +1,27 @@
+class calculator{
+void add(int a,int b){
+System.out.println("a+b = "+(a+b));
+}
+void sub(int a,int b){
+System.out.println("a-b = "+(a-b));
+}
+}
+class advancecalculator extends calculator{//sub class
+void mult(int a,int b){
+System.out.println("a*b = "+(a*b));
+}
+}
+class scientificcalculator extends advancecalculator{
+void div(int a,int b){
+System.out.println("a/b = "+(a/b));
+}
+}
+class maincalculator{
+public static void main(String[] args){
+scientificcalculator cal = new scientificcalculator();
+cal.add(12,23);
+cal.sub(45,12);
+cal.mult(12,9);
+cal.div(12,3);
+}
+}

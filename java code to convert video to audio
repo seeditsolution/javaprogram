@@ -1,0 +1,17 @@
+
+import com.xuggle.mediatool.IMediaReader; 
+import com.xuggle.mediatool.IMediaWriter; 
+import com.xuggle.mediatool.ToolFactory; 
+import com.xuggle.xuggler.ICodec; 
+
+public class convert { 
+public static void main(String args[]){ 
+IMediaReader reader = ToolFactory.makeReader("F:/input.mkv"); 
+IMediaWriter writer = ToolFactory.makeWriter("F:/output.mp3", reader); 
+int sampleRate = 44100; 
+int channels = 1; 
+writer.addAudioStream(0, 0, ICodec.ID.CODEC_ID_MP3, channels, sampleRate); 
+while (reader.readPacket() == null); 
+
+} 
+} 

@@ -1,0 +1,22 @@
+public class Neon
+{
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a number to check for neon ");
+int a=sc.nextInt();
+int s=a*a;
+int d=0;
+int q=0;
+while(s>0)
+{
+q=s%10;
+d=d+q;
+s=s/10;
+}
+if(d==a)
+System.out.println("entered number is a neon number ");
+else
+System.out.println("Number you have entered is not a Neon Number");
+}
+}

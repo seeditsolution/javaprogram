@@ -1,0 +1,25 @@
+class Employee{      
+private String name;
+private int emp_id;
+public String Name(){  
+return name;  
+}  
+public int Emp_id(){  
+return emp_id;  
+} 
+public void Emp_id(int emp_id){  
+this.emp_id=emp_id;
+}  
+public void Name(String name){  
+this.name=name;
+}
+}  
+class Test1{  
+public static void main(String[] args){      
+Employee employee = new Employee();   
+employee.Name("vinay"); 
+employee.Emp_id(100);
+System.out.println("Name "+employee.Name());  
+System.out.println("Id "+employee.Emp_id()); 
+}  
+} 

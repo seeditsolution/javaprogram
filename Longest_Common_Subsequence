@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.*;
+
+public class solution {
+
+    public static ArrayList<Integer> longestSubsequence(int[] arr){
+        // Write your code here
+
+        HashMap<Integer,Integer> h=new HashMap<>();
+        ArrayList<Integer> ans=new ArrayList<>();
+        int small=arr[0];
+        int largest=arr[0];
+        for (int i = 0; i <arr.length ; i++) {
+            int tempsmall=arr[i];
+            int tempLarge=arr[i];
+            int k=1;
+            while(h.containsKey(arr[i]+k))
+            {
+                tempLarge=arr[i]+k;
+                k++;
+            }
+            k=1;
+            while(h.containsKey(arr[i]-k))
+            {
+                tempsmall=arr[i]-k;
+                k++;
+            }if(!h.containsKey(arr[i]))
+                h.put(arr[i],i );
+            if(tempLarge-tempsmall>largest-small||(tempLarge-tempsmall==largest-small&&h.get(tempsmall)<h.get(small)))
+            {
+                largest=tempLarge;
+                small=tempsmall;
+            }
+
+        }
+
+        for (int i = small; i <=largest ; i++) {
+            ans.add(i);
+
+        }
+
+
+
+        return ans;
+
+    }
+}

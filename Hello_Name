@@ -1,0 +1,10 @@
+import java.util.*;
+class Hello
+{
+public static void main(String args[])
+{
+Scannner sc=new Scanner(System.in);
+Stirng s=sc.next();
+System.out.println("Hello"+" "+s+" "+"to java world");
+}
+}

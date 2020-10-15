@@ -1,0 +1,9 @@
+public class JavaExample {
+    public static void main(String[] args) {
+        int num_1 = 15, num_2 = 2;
+        int quotient = num_1 / num_2;
+        int remainder = num_1 % num_2;
+        System.out.println("Quotient is: " + quotient);
+        System.out.println("Remainder is: " + remainder);
+    }
+}

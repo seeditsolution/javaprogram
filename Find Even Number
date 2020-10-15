@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class CheckEven {
+
+	public static void main(String[] args) {
+			
+int num;
+System.out.println("Enter the number");
+Scanner sc=new Scanner(System.in);
+num=sc.nextInt();
+if(num%2==0) {
+	System.out.println("The number is even");
+}
+else {
+	
+	System.out.println("This number is odd");
+}
+
+	}
+
+}

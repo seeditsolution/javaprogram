@@ -1,0 +1,36 @@
+function search(searchString) {
+ //we test if searchString is empty in that case we just return the original data
+ if (typeof searchString !== 'string' || searchString.length === 0) {
+ return bands;
+ }
+ 
+ //we make search string lower case
+ let searchLower = searchString.toLowerCase();
+ let filtered = bands.filter(band => {
+ if (band.name.toLowerCase().includes(searchLower)) {
+ return true;
+ }
+ 
+ if (band.description.toLowerCase().includes(searchLower)) {
+ return true;
+ }
+ 
+ //now we search in albums as well; we store values in an array
+ let filteredAlbums = band.albums.filter(album => {
+ if (album.name.toLowerCase().includes(searchLower)) {
+ return true; //this is a return for albums
+ }
+ 
+ return false; //this is a return for albums
+ });
+ 
+ if (filteredAlbums.length > 0) {
+ return true;
+ }
+ 
+
+ return false;
+ })
+ 
+ return filtered;
+}

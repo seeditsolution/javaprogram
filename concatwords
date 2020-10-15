@@ -1,0 +1,50 @@
+class Solution {
+    
+    public boolean isSmallEnough(int i, int j, int len) {
+        return j-i+1 <= len;
+    }
+    
+    public void solve(String s, int i, int j, String words[], int wordsLen, int wordLen, List<Integer> list) {
+        int len = wordsLen*wordLen;
+        if (j-i+1 == len) {
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            for(String word : words) {
+                if (map.containsKey(word)) map.put(word,map.get(word)+1);
+                else map.put(word,1);
+            }
+            boolean stop = false;
+            String word;
+            int index = i;
+            while (i <= j-wordLen+1 && !stop) {
+                word = s.substring(i,i+wordLen);
+                if (map.containsKey(word) && map.get(word) > 0) map.put(word,map.get(word)-1);
+                else stop = true;
+                i+=wordLen;
+            }
+            if (!stop) list.add(index);
+        }
+    }
+    
+    public void merge(String s, int i, int mid, int j, String words[], int wordsLen, int wordLen, List<Integer> list) {
+        int len = wordsLen * wordLen;
+        int begin = mid - len + 2;
+        if (begin < i) begin = i;
+        for(; begin <= mid && j-begin+1 >= len; begin++) solve(s,begin,begin+len-1,words,wordsLen,wordLen,list);
+    }
+    
+    public void DYV(String s, int i, int j, String words[], int wordsLen, int wordLen, List<Integer> list) {
+        if (isSmallEnough(i,j,wordsLen*wordLen)) solve(s,i,j,words,wordsLen,wordLen,list);
+        else {
+            int mid = (i+j)/2;
+            DYV(s,i,mid,words,wordsLen,wordLen,list);
+            DYV(s,mid+1,j,words,wordsLen,wordLen,list);
+            merge(s,i,mid,j,words,wordsLen,wordLen,list);
+        }
+    }
+    
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> list = new LinkedList<Integer>();
+        DYV(s,0,s.length()-1,words,words.length,words[0].length(),list);
+        return list;
+    }
+}
