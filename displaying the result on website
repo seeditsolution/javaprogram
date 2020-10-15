@@ -1,0 +1,11 @@
+<html xmlns=”http://www.w3.org/1999/xhtml”> 
+  <head> 
+    <title></title> 
+  </head> 
+  <body> 
+   <p id="ResultsP"></p>  
+   <script type="text/javascript">//Script Block 1 
+   document.getElementById('ResultsP').innerHTML ='Hello World!'; 
+   </script> 
+  </body> 
+<html> 
