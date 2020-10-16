@@ -1,0 +1,16 @@
+ListNode<Integer> removeKFromList(ListNode<Integer> l, int k) {
+   ListNode<Integer> out = new ListNode<>(null);
+   out.next = l;
+   
+   ListNode<Integer> curr = l, prev = out;
+   for(; curr != null; ){
+       if(curr.value == k){
+           prev.next = curr.next;
+           curr = curr.next;
+           continue;
+       }
+       prev = curr;
+       curr = curr.next;
+   }
+    return out.next;
+}
