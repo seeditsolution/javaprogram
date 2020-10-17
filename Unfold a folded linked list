@@ -1,0 +1,119 @@
+public class GFG { 
+  
+    // Node Class 
+    private class Node { 
+        int data; 
+        Node next; 
+    } 
+  
+    // Head of the list 
+    private Node head; 
+  
+    // Tail of the list 
+    private Node tail; 
+  
+    // Function to print the list 
+    public void display() 
+    { 
+  
+        if (head == null) 
+            return; 
+        Node temp = head; 
+  
+        while (temp != null) { 
+            System.out.print(temp.data + " "); 
+            temp = temp.next; 
+        } 
+        System.out.println(); 
+    } 
+  
+    // Funcion to add node in the list 
+    public void push(int data) 
+    { 
+  
+        // Create new node 
+        Node nn = new Node(); 
+        nn.data = data; 
+        nn.next = null; 
+  
+        // Linking at first position 
+        if (head == null) { 
+            head = nn; 
+        } 
+        else { 
+            Node temp = head; 
+  
+            while (temp.next != null) { 
+                temp = temp.next; 
+            } 
+  
+            // Linking at last in list 
+            temp.next = nn; 
+        } 
+        // Function to unfold the given link list 
+    private void unfold(Node node) 
+    { 
+        if (node == null) 
+            return; 
+  
+        // This condition will reach if 
+        // the number of nodes is odd 
+        // head and tail is same i.e. last node 
+        if (node.next == null) { 
+            head = tail = node; 
+            return; 
+        } 
+  
+        // This base condition will reach if 
+        // the number of nodes is even 
+        // mark head to the second last node 
+        // and tail to the last node 
+        else if (node.next.next == null) { 
+            head = node; 
+            tail = node.next; 
+            return; 
+        } 
+  
+        // Storing next node in temp pointer 
+        // before making the recursive call 
+        Node temp = node.next; 
+  
+        // Recursive call 
+        unfold(node.next.next); 
+  
+        // Connecting first node to head 
+        // and mark it as a new head 
+        node.next = head; 
+        head = node; 
+  
+        // Connecting tail to second node (temp) 
+        // and mark it as a new tail 
+        tail.next = temp; 
+        tail = temp; 
+        tail.next = null; 
+    } 
+  
+    // Driver code 
+    public static void main(String[] args) 
+    { 
+  
+        GFG l = new GFG(); 
+  
+        // Adding nodes to the list 
+        l.push(1); 
+        l.push(5); 
+        l.push(2); 
+        l.push(4); 
+        l.push(3); 
+  
+        // Displaying the original nodes 
+        l.display(); 
+  
+        // Calling unfold function 
+        l.unfold(l.head); 
+  
+        // Displaying the list 
+        // after modification 
+        l.display(); 
+    } 
+} 
