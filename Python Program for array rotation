@@ -1,0 +1,16 @@
+#Function to left rotate arr[] of size n by d 
+def leftRotate(arr, d, n): 
+    for i in range(gcd(d,n)): 
+          
+        # move i-th values of blocks  
+        temp = arr[i] 
+        j = i 
+        while 1: 
+            k = j + d 
+            if k >= n: 
+                k = k - n 
+            if k == i: 
+                break
+            arr[j] = arr[k] 
+            j = k 
+        arr[j] = temp 
