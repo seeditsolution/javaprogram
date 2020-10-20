@@ -1,0 +1,19 @@
+
+import java.util.*;
+import java.text.*;
+import java.io.*;
+
+public class GMTtoCST{
+  public static void main(String args[]){
+  Date date = new Date();
+  DateFormat cstFormat = new SimpleDateFormat();
+  DateFormat gmtFormat = new SimpleDateFormat();
+  TimeZone gmtTime = TimeZone.getTimeZone("GMT");
+  TimeZone cstTime = TimeZone.getTimeZone("CST");
+  
+  cstFormat.setTimeZone(gmtTime);
+  gmtFormat.setTimeZone(cstTime);
+  System.out.println("Time in GMT: " + cstFormat.format(date));
+  System.out.println("Time in CST: " + gmtFormat.format(date));
+  }
+}
