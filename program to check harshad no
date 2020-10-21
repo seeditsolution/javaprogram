@@ -1,0 +1,27 @@
+import java.util.*;
+import java.lang.*;
+public class Main
+{
+
+ 
+  public static void main (String[]args)
+  {
+   
+ int no=1729;
+ int d=0,sum=0;
+ int t=no;
+while(no>0)
+{
+    d=no%10;
+    sum=sum+d;
+    no=no/10;
+}
+if(t%sum==0)
+{
+    System.out.println("Harshad Number");
+}
+else{
+    
+    System.out.println("Not a Harshad Number");
+}
+}}
