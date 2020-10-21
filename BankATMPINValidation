@@ -1,0 +1,52 @@
+
+import java.util.Scanner;
+
+public class BankPasswordValidation implements Correctpin{
+		
+	public static void main(String[] args) throws WrongPasswordException {
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("Insert your atm card");
+		int count=1;
+		try {
+		while(true) {
+			System.out.println("Enter the pin");
+			int pin=scanner.nextInt();
+			if(count==3) {
+				throw new WrongPasswordException();
+			}
+			if(pin==PIN) {
+				
+				break;
+			}
+			else {
+				System.out.println("Sorry Enter PIN Is Not Matching");
+				System.out.println("Please try again...........");
+				count++;
+			}
+		}
+		}
+		catch (WrongPasswordException e) {
+			System.out.println("Your enter wrong pin More than the limit");
+			System.out.println("Please visit nearest bank or try after 24 hours");
+		}
+		System.out.println("Plaese Enter the Amount");
+		int amount=scanner.nextInt();
+		if(amount>DEPOSITAMMOUNT) {
+			System.out.println("Sorry Your Account insufficient of money ");
+		}
+		else {
+			System.out.println("Successfully withdrawn amount "+amount);
+			System.out.println("Remaing balance="+(DEPOSITAMMOUNT-amount));
+		}
+		scanner.close();
+	}
+	
+}
+interface Correctpin{
+	int PIN=8764;
+	int DEPOSITAMMOUNT=10000;
+}
+
+class WrongPasswordException extends Exception{
+	
+}
