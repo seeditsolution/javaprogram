@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.Scanner;
+import java.lang.String;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+            
+        int low=0;
+        int high=A.length()-1;
+        int a=1;
+        while(low<high){
+            if (A.charAt(low)!=A.charAt(high)){
+                a++;}
+                   low++;
+            high--;
+            }
+            if(a==1){System.out.println("Yes");}
+            else {System.out.println("No");}
+            }
+        
+        }
+
+
+
+
