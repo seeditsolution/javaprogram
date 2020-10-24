@@ -1,0 +1,53 @@
+// I'm your one the student in youtube. I've learn a lot from your youtube video. This is my pull request for hacktoberfest kindly accept it. Thansk.
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<script>
+ function unitCalSwitch(u) {
+
+var result;
+
+switch (true) {
+
+    case u >= 0 && u <= 100:
+
+        result = u * 6;
+
+        document.getElementById("result").innerHTML = result;
+
+        break;
+
+        case u >= 101 && u <= 200:
+
+        result=u * 9; document.getElementById("result").innerHTML=result;
+
+        break;
+
+        case u >= 201 && u <= 300: 
+
+        result=u * 12;
+
+        document.getElementById("result").innerHTML=result; 
+
+        break;
+
+        case u > 300: 
+
+        result=u * 17; 
+
+        document.getElementById("result").innerHTML=result; 
+
+        break;
+
+    default:
+
+        text = "Please Enter Correct information";
+
+}
+
+</script>
+
+</body>
+</html>
