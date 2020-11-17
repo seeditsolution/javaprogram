@@ -1,0 +1,22 @@
+// java implementation of the approach 
+
+import java.io.*; 
+
+class GFG { 
+
+// Driver code 
+
+	public static void main (String[] args) { 
+			int d = 10; 
+	double a; 
+
+	// according to formula derived above 
+	a = (double)(360 - (6 * d)) / 4; 
+
+	// print all the angles 
+	System.out.print( a + ", " + (a + d) + ", " + (a + (2 * d)) 
+		+ ", " + (a + (3 * d))); 
+	} 
+} 
+//This code is contributed 
+//by inder_verma 
