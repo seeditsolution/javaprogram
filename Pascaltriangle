@@ -1,0 +1,31 @@
+package com.code;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class PascalTraingle {
+public static void main(String[] args) {
+	Scanner o=new Scanner (System.in);
+	int r=o.nextInt();
+	ArrayList<ArrayList<Integer>>result=new ArrayList<ArrayList<Integer>>();
+	ArrayList<Integer>row;
+	ArrayList<Integer>prev=null;
+	for(int i=0;i<r;i++) {
+		row=new ArrayList<>();
+		for(int j=0;j<=i;j++) {
+			if(j==0||j==i) {
+			row.add(1);	
+			}
+			else {
+				row.add(prev.get(j-1)+prev.get(j));
+			}
+		}
+		result.add(row);
+		prev=row;
+	}
+	for(ArrayList<Integer>a:result) {
+		System.out.println(a);
+	}
+///pascal triangle
+}
+}
