@@ -1,0 +1,15 @@
+import java.util.Scanner;
+public class MyClass
+{
+public static void main(String[] args)
+{
+int x, y, sum;
+Scanner myobj= new Scanner(System.in);
+System.out.println("type a number:");
+x = myobj.nxtInt();
+System.out.println("type a another number:");
+y = myobj.nxtInt();
+sum = x + y
+System.out.println("Sum is: " +sum);
+}
+}
