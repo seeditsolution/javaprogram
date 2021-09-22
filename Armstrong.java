@@ -14,8 +14,8 @@ A+=r*r*r;
 x=x/10;
 }
 if(temp==A)
-System.out.println("Armstrong no");
+System.out.println("Armstrong number");
 else
-System.out.println("not an Armstrong no");
+System.out.println("Not an Armstrong number");
 }
 }
