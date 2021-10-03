@@ -1,8 +1,9 @@
+import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
-        int num = 29;
+        System.out.println("Enter the number: ");
+        int num = new Scanner(System.in).nextInt();
         boolean flag = false;
         for(int i = 2; i <= num/2; ++i)
         {
